@@ -1,8 +1,9 @@
 # Launch-Kubernetes----aws-cli-kubectl-minikube
 
-Kubernetes Installation Using KOPS on EC2
+## Kubernetes Installation Using KOPS on EC2
 
-- Create an EC2 instance
+### Create an EC2 instance
+
 - Dependencies required
 
 Python3
@@ -59,13 +60,14 @@ sudo mv kops-linux-amd64 /usr/local/bin/kops
 
 - Now do
   kunectl get nodes
-  u will notice kubectl is already connected to your k8s cluster
+
+u will notice kubectl is already connected to your k8s cluster
 
 - run the yaml file to create pod with below commands
   kubectl create -f pod.yaml
 
-* now u can view your container running with command
+- now u can view your container running with command
   kubectl get pods -o wide
 
-* Refrence page for help with commands
+- Refrence page for help with commands
   https://kubernetes.io/pt-br/docs/reference/kubectl/cheatsheet/
