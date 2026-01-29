@@ -69,5 +69,14 @@ u will notice kubectl is already connected to your k8s cluster
 - now u can view your container running with command  
   kubectl get pods -o wide
 
+-to see your application running
+do
+minikube ssh
+
+inside docker@minikube
+curl {ip address u get form "kubectl get pods -o wide" }
+
+u will see ur application running
+
 - Refrence page for help with commands  
   https://kubernetes.io/pt-br/docs/reference/kubectl/cheatsheet/
