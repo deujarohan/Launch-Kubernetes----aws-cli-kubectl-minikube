@@ -1,8 +1,20 @@
 # Launch-Kubernetes----aws-cli-kubectl-minikube
 
-## Kubernetes Installation Using KOPS on EC2
+This project uses Minikube to run a local Kubernetes cluster on Windows 11.
+
+## Kubernetes Resources Created
+
+The following Kubernetes objects were created and verified in the Minikube cluster:
+
+Deployments
+
+ReplicaSets
+
+Pods
 
 ### Create an EC2 instance
+
+<!-- if u are using window skip this -->
 
 - Dependencies required
 
@@ -58,10 +70,23 @@ chmod +x kops-linux-amd64
 
 sudo mv kops-linux-amd64 /usr/local/bin/kops
 
+### Download Minikube directly to C:\minikube
+
+mkdir -p /c/minikube
+curl -Lo /c/minikube/minikube.exe https://github.com/kubernetes/minikube/releases/latest/download/minikube-windows-amd64.exe
+
+- start your docker engin
+
+<!-- Start minikube in docker driver -->
+
+minikube start --driver=docker
+
 - Now do  
   kunectl get nodes
 
 u will notice kubectl is already connected to your k8s cluster
+
+###directly creating pods
 
 - run the yaml file to create pod with below commands  
   kubectl create -f pod.yaml
@@ -69,14 +94,42 @@ u will notice kubectl is already connected to your k8s cluster
 - now u can view your container running with command  
   kubectl get pods -o wide
 
--to see your application running
-do
+--to see your application running
+
+<!-- do -->
+
 minikube ssh
 
-inside docker@minikube
+<!-- inside docker@minikube -->
+
 curl {ip address u get form "kubectl get pods -o wide" }
 
-u will see ur application running
+<!-- u will see ur application running -->
+
+###creating deployment
+kubectl apply -f deployment.yaml
+
+<!-- You can see deployment, replicaset and pods being created just through deployment -->
+
+kubectl get deploy
+
+###lets observe auto healing
+
+<!-- to observe pods live, open new terminal and type -->
+
+kubectl get pods -w
+
+<!-- then delete one pods in another terminal -->
+
+kubectl delete pod nginx-deployment-77bc6bd484-6zlkh
+
+<!-- you can see even before termination of pods is done, new container is being created -->
+<!-- its replica set purpose to maintain to maintain a stable set of replica pods at
+any given time and its doing same -->
+
+<!-- to delete deployment -->
+
+kubectl delete deployment nginx-deployment
 
 - Refrence page for help with commands  
   https://kubernetes.io/pt-br/docs/reference/kubectl/cheatsheet/
